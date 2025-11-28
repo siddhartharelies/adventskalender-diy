@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tür 1</title>
+</head>
+<body>
+  <h1>Tür 1</h1>
+  <p>Rätsel:</p>
+  <p>
+    Ich habe Tasten, aber keine Türen.<br>
+    Ich mache Musik, doch bin kein Radio.<br>
+    Was bin ich?
+  </p>
+
+  <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2.</p>
+
+  <!-- Formular: Lösung direkt hier prüfen -->
+  <h2>Lösung testen</h2>
+  <form id="checkForm">
+    <input type="text" id="solution" placeholder="Deine Lösung">
+    <button type="submit">Prüfen</button>
+  </form>
+
+  <p id="checkResult"></p>
+
+  <p><a href="index.html">Zurück zur Übersicht</a></p>
+
+  <script>
+    document.getElementById("checkForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const solution = document.getElementById("solution").value;
+
+      const response = await fetch("/.netlify/functions/checkDoor2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: solution,
+          mode: "check"   // hier nur prüfen, Tür nicht öffnen
+        })
+      });
+
+      const data = await response.json();
+      const result = document.getElementById("checkResult");
+
+      if (data.success) {
+        result.textContent = "✅ Deine Lösung ist richtig! Du kannst sie als Passwort für Tür 2 benutzen.";
+      } else {
+        result.textContent = "❌ Diese Lösung ist leider falsch. Versuche es noch einmal.";
+      }
+    });
+  </script>
+</body>
+</html>
