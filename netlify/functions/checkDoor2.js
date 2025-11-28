@@ -1,5 +1,21 @@
 // netlify/functions/checkDoor2.js
 
+// Hilfsfunktion: aktuelles Datum in Europe/Berlin als "YYYY-MM-DD"
+function getTodayInBerlin() {
+  const now = new Date();
+
+  // Zeit in Europe/Berlin "umrechnen"
+  const berlinNow = new Date(
+    now.toLocaleString("en-US", { timeZone: "Europe/Berlin" })
+  );
+
+  const year = berlinNow.getFullYear();
+  const month = String(berlinNow.getMonth() + 1).padStart(2, "0");
+  const day = String(berlinNow.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`; // z.B. "2025-12-02"
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
@@ -21,12 +37,16 @@ exports.handler = async (event) => {
   const entered = (body.password || "").trim().toLowerCase();
   const mode = (body.mode || "open").toLowerCase(); // "check" oder "open"
 
-  // Das richtige Passwort für Tür 2 (Lösung aus Tür 1)
+  // 1) Passwort für Tür 2 (Lösung aus Tür 1)
   const correctPassword = "klavier";
+
+  // 2) Mindestdatum für das Öffnen von Tür 2
+  const minDate = "2025-12-02"; // im Format YYYY-MM-DD
+  const today = getTodayInBerlin();
 
   const isCorrect = (entered === correctPassword);
 
-  // Nur prüfen (für die Rätselseite Tür 1)
+  // ---- Modus "check": nur prüfen, ob Lösung stimmt, Datum egal ----
   if (mode === "check") {
     return {
       statusCode: 200,
@@ -35,7 +55,22 @@ exports.handler = async (event) => {
     };
   }
 
-  // Modus "open": tatsächliche Tür öffnen (Inhalt von Tür 2 ausliefern)
+  // ---- Modus "open": Tür wirklich öffnen ----
+  // Zuerst Datum prüfen
+  if (today < minDate) {
+    // Noch zu früh für diese Tür
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        success: false,
+        tooEarly: true,
+        availableFrom: minDate
+      })
+    };
+  }
+
+  // Datum passt, jetzt Passwort prüfen
   if (isCorrect) {
     const contentHtml = `
       <h2>Glückwunsch!</h2>
