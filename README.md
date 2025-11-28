@@ -17,6 +17,8 @@
 - Wir wünsche euch viel Spaß beim Rätseln
 - We wish you lots of fun solving the puzzles!
 ---
-- PS: in Tür 6 erwartet euch eine Zwischenbelohnung. Behind door 6, a small intermediate reward is waiting for you.
+- PS: hinter Tür 6 erwartet euch eine Zwischenbelohnung.
+- PS: Behind door 6, a small intermediate reward is waiting for you.
 ---
-- PPS: Wenn alle Rätsel richtig gelöst wurden, erwartet euch im 24. Türchen eine Überraschung. If all puzzles are solved correctly, a surprise awaits you behind door 24
+- PPS: Wenn alle Rätsel richtig gelöst wurden, erwartet euch hinter dem 24. Türchen eine Überraschung.
+- PPS: If all puzzles are solved correctly, a surprise awaits you behind door 24
