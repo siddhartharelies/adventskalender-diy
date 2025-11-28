@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tür 25 – README</title>
+
+  <!-- Marked.js: kleine Bibliothek, die Markdown in HTML umwandelt -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    #readme-container {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 20px;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tür 25 – README</h1>
+  <p>
+    Hier findest du die Projektbeschreibung (README) dieses Adventskalenders,
+    automatisch direkt aus dem GitHub-Repository geladen.
+  </p>
+
+  <p><strong>Hinweis:</strong> Änderungen an der README auf GitHub werden beim nächsten Laden dieser Seite automatisch übernommen.</p>
+
+  <div id="status">Lade README…</div>
+  <div id="readme-container"></div>
+
+  <p style="margin-top: 20px;">
+    <a href="index.html">Zurück zur Übersicht</a>
+  </p>
+
+  <script>
+    // 🔧 HIER ANPASSEN:
+    // Ersetze DEINNAME und DEINREPO durch deinen GitHub-Nutzernamen und Repo-Namen.
+    const githubUser = "DEINNAME";           // z.B. "maxmustermann"
+    const githubRepo = "adventskalender-netlify"; // dein Repository-Name
+    const branch = "main"; // oder "master", falls dein Repo so heißt
+
+    const readmeUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/README.md`;
+
+    const statusEl = document.getElementById("status");
+    const containerEl = document.getElementById("readme-container");
+
+    async function loadReadme() {
+      try {
+        const res = await fetch(readmeUrl);
+
+        if (!res.ok) {
+          statusEl.textContent = "Konnte die README nicht laden (HTTP-Fehler: " + res.status + ").";
+          return;
+        }
+
+        const markdown = await res.text();
+
+        // Markdown → HTML mit marked.js
+        const html = marked.parse(markdown);
+
+        statusEl.style.display = "none";
+        containerEl.innerHTML = html;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Beim Laden der README ist ein Fehler aufgetreten.";
+      }
+    }
+
+    loadReadme();
+  </script>
+</body>
+</html>
