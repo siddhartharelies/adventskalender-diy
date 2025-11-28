@@ -1,2 +1,22 @@
 # adventskalender-diy
-Adventskalender für Dustin und Lumi
+- Adventskalender für Dustin und Lumi / Advent calendar for Dustin and Lumi
+
+- Jede Türe wird erst durch Eingabe eines Kennwort geöffnet und beinhaltet ein Rätsel.
+- Each door can only be opened by entering a password and contains a puzzle.
+
+- Das Lösungswort des Rätsels ergibt das Kennwort zur Öffnung der nächsten Türe. Das Lösungswort kann in deutsch und in englisch eingegeben werden.
+- The solution word of the puzzle becomes the password for opening the next door. The solution word can be entered in German or in English.
+
+- Ob die Lösung richtig ist, kann vorab getestet werden.
+- You can test in advance whether your solution is correct.
+
+- Die Türen lassen sich erst an dem jeweiligen Tag öffnen - unabhängig vom richtigen Kennwort.
+- The doors can only be opened on their designated day – regardless of whether the password is correct.
+
+- Wir wünsche euch viel Spaß beim Rätseln
+- We wish you lots of fun solving the puzzles!
+
+- PS: in Tür 6 erwartet euch eine Zwischenbelohnung.
+- PS: Behind door 6, a small intermediate reward is waiting for you.
+- PPS: Wenn alle Rätsel richtig gelost wurden, erwartet euch im 24. Türchen eine Überraschung.
+- PPS: If all puzzles are solved correctly, a surprise awaits you behind door 24.
