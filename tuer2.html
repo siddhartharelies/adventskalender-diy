@@ -41,15 +41,24 @@
       const msg = document.getElementById("message");
       const contentDiv = document.getElementById("secret-content");
 
-      if (data.success) {
-        msg.textContent = "Richtig! Tür 2 öffnet sich.";
-        contentDiv.innerHTML = data.contentHtml;
-        contentDiv.style.display = "block";
-      } else {
-        msg.textContent = "Falsches Passwort, versuche es noch einmal.";
-        contentDiv.style.display = "none";
-        contentDiv.innerHTML = "";
-      }
+     if (data.success) {
+  msg.textContent = "Richtig! Tür 2 öffnet sich.";
+  contentDiv.innerHTML = data.contentHtml;
+  contentDiv.style.display = "block";
+} else {
+  // Prüfen, ob es zu früh ist
+  if (data.tooEarly) {
+    // Datum aus Antwort
+    const ab = data.availableFrom || "2025-12-02";
+    const [year, month, day] = ab.split("-");
+    msg.textContent = `Diese Tür kann erst ab dem ${day}.${month}.${year} geöffnet werden.`;
+  } else {
+    msg.textContent = "Falsches Passwort, versuche es noch einmal.";
+  }
+
+  contentDiv.style.display = "none";
+  contentDiv.innerHTML = "";
+}
     });
   </script>
 </body>
