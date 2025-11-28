@@ -6,50 +6,49 @@
 </head>
 <body>
   <h1>Tür 1</h1>
-  <p>Rätsel:</p>
-  <p>
-    Ich habe Tasten, aber keine Türen.<br>
-    Ich mache Musik, doch bin kein Radio.<br>
-    Was bin ich?
-  </p>
+  <p>Gib das Passwort ein (die Lösung aus der Mail):</p>
 
-  <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2.</p>
-
-  <!-- Formular: Lösung direkt hier prüfen -->
-  <h2>Lösung testen</h2>
-  <form id="checkForm">
-    <input type="text" id="solution" placeholder="Deine Lösung">
-    <button type="submit">Prüfen</button>
+  <form id="pwForm">
+    <input type="password" id="password" placeholder="Passwort">
+    <button type="submit">Öffnen</button>
   </form>
 
-  <p id="checkResult"></p>
+  <p id="message"></p>
+
+  <div id="secret-content" style="display:none; margin-top:20px;"></div>
 
   <p><a href="index.html">Zurück zur Übersicht</a></p>
 
   <script>
-    document.getElementById("checkForm").addEventListener("submit", async function (event) {
+    document.getElementById("pwForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      const solution = document.getElementById("solution").value;
+      const pw = document.getElementById("password").value;
 
-      const response = await fetch("/.netlify/functions/checkDoor2", {
+      const response = await fetch("/.netlify/functions/checkDoor1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          password: solution,
-          mode: "check"   // hier nur prüfen, Tür nicht öffnen
+          password: pw,
+          mode: "open"   // hier wirklich Tür öffnen
         })
       });
 
       const data = await response.json();
-      const result = document.getElementById("checkResult");
+
+      const msg = document.getElementById("message");
+      const contentDiv = document.getElementById("secret-content");
 
       if (data.success) {
-        result.textContent = "✅ Deine Lösung ist richtig! Du kannst sie als Passwort für Tür 2 benutzen.";
+        msg.textContent = "Richtig! Tür 1 öffnet sich.";
+        contentDiv.innerHTML = data.contentHtml;
+        contentDiv.style.display = "block";
       } else {
-        result.textContent = "❌ Diese Lösung ist leider falsch. Versuche es noch einmal.";
+        msg.textContent = "Falsches Passwort, versuche es noch einmal.";
+        contentDiv.style.display = "none";
+        contentDiv.innerHTML = "";
       }
     });
   </script>
