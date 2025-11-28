@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Adventskalender 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    /* Gesamte Seite */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      margin: 0;
+
+      /* Seitenhintergrund (optional) */
+      background-image: url('img/background.jpg'); /* eigenes Bild in /img/background.jpg */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      position: relative;
+    }
+
+    /* dunkler Overlay, damit Text lesbar bleibt */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: -1;
+    }
+
+    h1, p {
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      margin: 0.2em 0;
+    }
+
+    h1 {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      max-width: 700px;
+      margin: 30px auto 10px auto;
+    }
+
+    .door {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: bold;
+      overflow: hidden;
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* 3D-Effekt */
+      perspective: 800px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    .door span {
+      position: relative;
+      z-index: 2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    /* „klappende“ Tür */
+    .door::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      /* Standard-Fallback, falls kein Bild o.ä. */
+      background: linear-gradient(135deg, #b30000, #ff5e5e);
+      opacity: 0.95;
+
+      transform-origin: left center;
+      transform: rotateY(0deg);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    /* Hover: Tür öffnet sich etwas (nur für freigegebene Türen, s.u.) */
+    .door-available:hover::before {
+      transform: rotateY(-25deg);
+      opacity: 0.7;
+    }
+
+    /* Türen mit individuellem Hintergrundbild */
+    .door1  { background-image: url('img/door01.jpg'); }
+    .door2  { background-image: url('img/door02.jpg'); }
+    .door3  { background-image: url('img/door03.jpg'); }
+    .door4  { background-image: url('img/door04.jpg'); }
+    .door5  { background-image: url('img/door05.jpg'); }
+    .door6  { background-image: url('img/door06.jpg'); }
+    .door7  { background-image: url('img/door07.jpg'); }
+    .door8  { background-image: url('img/door08.jpg'); }
+    .door9  { background-image: url('img/door09.jpg'); }
+    .door10 { background-image: url('img/door10.jpg'); }
+    .door11 { background-image: url('img/door11.jpg'); }
+    .door12 { background-image: url('img/door12.jpg'); }
+    .door13 { background-image: url('img/door13.jpg'); }
+    .door14 { background-image: url('img/door14.jpg'); }
+    .door15 { background-image: url('img/door15.jpg'); }
+    .door16 { background-image: url('img/door16.jpg'); }
+    .door17 { background-image: url('img/door17.jpg'); }
+    .door18 { background-image: url('img/door18.jpg'); }
+    .door19 { background-image: url('img/door19.jpg'); }
+    .door20 { background-image: url('img/door20.jpg'); }
+    .door21 { background-image: url('img/door21.jpg'); }
+    .door22 { background-image: url('img/door22.jpg'); }
+    .door23 { background-image: url('img/door23.jpg'); }
+    .door24 { background-image: url('img/door24.jpg'); }
+
+    /* Tür-Zustände: „locked“ vs. „available“ (wird per JS gesetzt) */
+
+    .door-locked {
+      filter: grayscale(70%);
+      cursor: not-allowed;
+    }
+
+    .door-locked::before {
+      transform: rotateY(0deg) !important;
+      opacity: 0.9;
+    }
+
+    .door-locked span::after {
+      content: " 🔒";
+      font-size: 0.9rem;
+    }
+
+    .door-available {
+      filter: none;
+      cursor: pointer;
+    }
+
+    .hint {
+      color: #eee;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .door {
+        height: 100px;
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Adventskalender DIY</h1>
+  <p>Jede gelöste Aufgabe öffnet die nächste Tür – ab dem jeweiligen Datum.</p>
+  <p class="hint">Hinweis: Türen, die noch nicht „dran“ sind, sind ausgegraut und mit einem Schloss markiert.</p>
+
+  <div class="grid">
+    <!-- data-date = frühestes Öffnungsdatum im Format YYYY-MM-DD -->
+    <a class="door door1"  href="tuer1.html"  data-date="2025-12-01"><span>1</span></a>
+    <a class="door door2"  href="tuer2.html"  data-date="2025-12-02"><span>2</span></a>
+    <a class="door door3"  href="tuer3.html"  data-date="2025-12-03"><span>3</span></a>
+    <a class="door door4"  href="tuer4.html"  data-date="2025-12-04"><span>4</span></a>
+    <a class="door door5"  href="tuer5.html"  data-date="2025-12-05"><span>5</span></a>
+    <a class="door door6"  href="tuer6.html"  data-date="2025-12-06"><span>6</span></a>
+    <a class="door door7"  href="tuer7.html"  data-date="2025-12-07"><span>7</span></a>
+    <a class="door door8"  href="tuer8.html"  data-date="2025-12-08"><span>8</span></a>
+    <a class="door door9"  href="tuer9.html"  data-date="2025-12-09"><span>9</span></a>
+    <a class="door door10" href="tuer10.html" data-date="2025-12-10"><span>10</span></a>
+    <a class="door door11" href="tuer11.html" data-date="2025-12-11"><span>11</span></a>
+    <a class="door door12" href="tuer12.html" data-date="2025-12-12"><span>12</span></a>
+    <a class="door door13" href="tuer13.html" data-date="2025-12-13"><span>13</span></a>
+    <a class="door door14" href="tuer14.html" data-date="2025-12-14"><span>14</span></a>
+    <a class="door door15" href="tuer15.html" data-date="2025-12-15"><span>15</span></a>
+    <a class="door door16" href="tuer16.html" data-date="2025-12-16"><span>16</span></a>
+    <a class="door door17" href="tuer17.html" data-date="2025-12-17"><span>17</span></a>
+    <a class="door door18" href="tuer18.html" data-date="2025-12-18"><span>18</span></a>
+    <a class="door door19" href="tuer19.html" data-date="2025-12-19"><span>19</span></a>
+    <a class="door door20" href="tuer20.html" data-date="2025-12-20"><span>20</span></a>
+    <a class="door door21" href="tuer21.html" data-date="2025-12-21"><span>21</span></a>
+    <a class="door door22" href="tuer22.html" data-date="2025-12-22"><span>22</span></a>
+    <a class="door door23" href="tuer23.html" data-date="2025-12-23"><span>23</span></a>
+    <a class="door door24" href="tuer24.html" data-date="2025-12-24"><span>24</span></a>
+  </div>
+
+  <script>
+    // Heutiges Datum als YYYY-MM-DD (Browser-Zeit)
+    function getTodayYMD() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    const today = getTodayYMD();
+
+    document.querySelectorAll('.door').forEach(door => {
+      const minDate = door.getAttribute('data-date');
+      if (!minDate) return;
+
+      if (today >= minDate) {
+        // Tür darf (optisch) geöffnet werden
+        door.classList.add('door-available');
+      } else {
+        // Tür ist (optisch) noch verschlossen
+        door.classList.add('door-locked');
+
+        // Klick blockieren und Hinweis geben
+        door.addEventListener('click', function (event) {
+          event.preventDefault();
+          const [y, m, d] = minDate.split("-");
+          alert(`Diese Tür kann erst am ${d}.${m}.${y} geöffnet werden.`);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
