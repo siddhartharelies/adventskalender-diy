@@ -2,11 +2,11 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Tür 1</title>
+  <title>Tür N</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    /* Seitenhintergrund */
+    /* Seitenhintergrund – Tür-spezifisches Bild + Fallback */
     body {
       margin: 0;
       min-height: 100vh;
@@ -16,23 +16,22 @@
       justify-content: center;
       padding: 20px;
 
-      /* ⭐ Tür-spezifisches Hintergrundbild */
+      /* ✅ HIER ANPASSEN: bg-doorN.jpg + fallback */
       background-image:
-        url('img/bg-door01.jpg'),
-        url('img/background-door.jpg'); /* fallback */
+        url('img/bg-doorN.jpg'),       /* z.B. bg-door03.jpg */
+        url('img/background-door.jpg');/* gemeinsamer Fallback */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
       position: relative;
     }
 
-    /* dunkler Overlay, verbessert Lesbarkeit */
+    /* dunkler Overlay für Lesbarkeit */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.40);
+      background: rgba(0, 0, 0, 0.4);
       z-index: -1;
     }
 
@@ -63,7 +62,9 @@
       font-weight: bold;
       font-size: 1.4rem;
       color: #fff;
-      background-image: url('img/door01.jpg'); /* Tür-Icon wie Startseite */
+
+      /* ✅ HIER ANPASSEN: Türchen-Bild für diese Tür */
+      background-image: url('img/doorNN.jpg');  /* z.B. door03.jpg */
       background-size: cover;
       background-position: center;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
@@ -74,24 +75,25 @@
       font-size: 1.8rem;
     }
 
-    p {
-      line-height: 1.5;
-      margin: 0.5em 0;
-    }
-
     h2 {
       margin-top: 20px;
       margin-bottom: 10px;
       font-size: 1.3rem;
     }
 
+    p {
+      line-height: 1.5;
+      margin: 0.5em 0;
+    }
+
+    input[type="password"],
     input[type="text"] {
       padding: 6px 8px;
       border-radius: 6px;
       border: 1px solid #ccc;
       font-size: 0.95rem;
       width: 100%;
-      max-width: 250px;
+      max-width: 260px;
       box-sizing: border-box;
     }
 
@@ -117,6 +119,13 @@
       margin-top: 8px;
       font-weight: bold;
     }
+
+    #door-content {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 12px;
+      display: none; /* wichtig: erst nach richtigem Passwort anzeigen */
+    }
   </style>
 </head>
 
@@ -124,57 +133,123 @@
   <div class="door-page">
 
     <div class="door-header">
+      <!-- ✅ HIER NUMMER EINTRAGEN: z.B. 3 -->
       <div class="door-number">1</div>
       <h1>Tür 1</h1>
     </div>
 
-    <p><strong>Rätsel:</strong></p>
-    <p>
-      „In welchem winterlichen Land ziehen während der heiligen Zeit
-vermummte Gestalten von Haus zu Haus,
-singen alte Lieder und wünschen Glück –
-ein Brauch namens Kolyady?“<br>
-      “In which wintry country do masked carolers roam from house to house
-during the holy season, singing ancient songs
-and bringing good wishes — a tradition called Kolyady?”<br>
-      In welchem Land feiere ich Weihnachten? In which country do I celebrate Christmas?
-    </p>
+    <!-- 1) Bereich: Passwort für diese Tür (aus vorheriger Tür) -->
+    <p><strong>Passwort für Tür 1 eingeben:</strong></p>
+    <p>Gib hier die Lösung aus Tür der Mail ein, um diese Tür zu öffnen.</p>
 
-    <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2./The solution to this puzzle is the password for Door 2.</p>
-
-    <h2>Lösung testen</h2>
-    <form id="checkForm">
-      <input type="text" id="solution" placeholder="Deine Lösung">
-      <button type="submit" class="button">Prüfen</button>
+    <form id="pwForm">
+      <input type="password" id="password" placeholder="Passwort für Tür N">
+      <button type="submit" class="button">Tür öffnen</button>
     </form>
 
-    <p id="checkResult" class="status"></p>
+    <p id="pwMessage" class="status"></p>
+
+    <!-- 2) Voller Inhalt der Tür: Rätsel für nächste Tür + Lösungstest -->
+    <div id="door-content">
+      <h2>Rätsel für Tür N+1</h2>
+
+      <!-- ✅ HIER DEIN RÄTSELTEXT -->
+      <p>
+        Hier kommt dein Rätsel, dessen Lösung das Passwort für Tür N+1 ist.<br>
+        Beispiel:<br>
+        Ich habe vier Beine und kann doch nicht laufen.<br>
+        Ich trage Teller und Gläser bei vielen Besuchen.<br>
+        Was bin ich?
+      </p>
+
+      <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2.</p>
+
+      <h2>Lösung für Tür 2 testen</h2>
+      <form id="checkNextForm">
+        <input type="text" id="nextSolution" placeholder="Lösung für Tür N+1">
+        <button type="submit" class="button">Lösung prüfen</button>
+      </form>
+
+      <p id="checkNextResult" class="status"></p>
+
+      <p style="margin-top: 12px;">
+        <!-- optional: Link direkt weiter zur nächsten Tür -->
+        <a class="back-link" href="tuerN+1.html">Weiter zu Tür 2</a>
+      </p>
+    </div>
 
     <a class="back-link" href="index.html">Zurück zur Kalender-Übersicht</a>
   </div>
 
   <script>
-    document.getElementById("checkForm").addEventListener("submit", async function (event) {
+    // ✅ HIER ANPASSEN:
+    // FÜR DIESE TÜR:
+    const thisDoorFunction = "checkDoor1";      // z.B. "checkDoor3"
+    // FÜR DIE NÄCHSTE TÜR (Lösungs-Test):
+    const nextDoorFunction = "checkDoorNplus2"; // z.B. "checkDoor4"
+
+    // Passwort für diese Tür prüfen
+    document.getElementById("pwForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      const solution = document.getElementById("solution").value;
+      const pw = document.getElementById("password").value;
 
-      const response = await fetch("/.netlify/functions/checkDoor2", {
+      const response = await fetch("/.netlify/functions/" + thisDoorFunction, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: pw,
+          mode: "open"   // Tür wirklich öffnen (inkl. Datumssperre in der Function)
+        })
+      });
+
+      const data = await response.json();
+      const msg = document.getElementById("pwMessage");
+      const contentDiv = document.getElementById("door-content");
+
+      if (data.success) {
+        msg.textContent = "✅ Richtig! Tür ist geöffnet.";
+        contentDiv.style.display = "block";
+      } else {
+        if (data.tooEarly) {
+          const ab = data.availableFrom || "";
+          if (ab) {
+            const [year, month, day] = ab.split("-");
+            msg.textContent = `⏳ Diese Tür kann erst am ${day}.${month}.${year} geöffnet werden.`;
+          } else {
+            msg.textContent = "⏳ Diese Tür ist noch nicht freigegeben.";
+          }
+        } else {
+          msg.textContent = "❌ Falsches Passwort, bitte versuche es erneut.";
+        }
+        contentDiv.style.display = "none";
+      }
+    });
+
+    // Lösung für NÄCHSTE Tür testen
+    document.getElementById("checkNextForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const solution = document.getElementById("nextSolution").value;
+
+      const response = await fetch("/.netlify/functions/" + nextDoorFunction, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
           password: solution,
-          mode: "check"
+          mode: "check"   // nur prüfen, noch NICHT öffnen
         })
       });
 
       const data = await response.json();
-      const result = document.getElementById("checkResult");
+      const result = document.getElementById("checkNextResult");
 
       if (data.success) {
-        result.textContent = "✅ Richtig! Du kannst dieses Passwort für Tür 2 benutzen.";
+        result.textContent = "✅ Die Lösung ist korrekt! Du kannst sie als Passwort für die nächste Tür benutzen.";
       } else {
         result.textContent = "❌ Diese Lösung ist leider falsch.";
       }
