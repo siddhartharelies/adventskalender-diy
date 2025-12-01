@@ -41,7 +41,7 @@ exports.handler = async (event) => {
   const correctPassword = "klavier";
 
   // 2) Mindestdatum für das Öffnen von Tür 2
-  const minDate = "2025-12-02"; // im Format YYYY-MM-DD
+  const minDate = "2025-12-01"; // im Format YYYY-MM-DD
   const today = getTodayInBerlin();
 
   const isCorrect = (entered === correctPassword);
