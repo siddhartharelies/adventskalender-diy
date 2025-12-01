@@ -5,7 +5,7 @@
 - Jede Türe wird erst durch Eingabe eines Kennwort geöffnet und beinhaltet ein Rätsel.
 - Each door can only be opened by entering a password and contains a puzzle.
 ---
-- Das Lösungswort des Rätsels ergibt das Kennwort zur Öffnung der nächsten Türe. Das Lösungswort kann in deutsch und in englisch eingegeben werden.
+- Das Lösungswort des Rätsels ergibt das Kennwort zur Öffnung der nächsten Türe. Das Lösungswort kann in deutsch oder in englisch eingegeben werden.
 - The solution word of the puzzle becomes the password for opening the next door. The solution word can be entered in German or in English.
 ---
 - Ob die Lösung richtig ist, kann vorab getestet werden.
