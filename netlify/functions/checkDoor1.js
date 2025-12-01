@@ -38,13 +38,18 @@ exports.handler = async (event) => {
   const mode = (body.mode || "open").toLowerCase(); // "check" oder "open"
 
   // 1) Passwort für Tür 2 (Lösung aus Tür 1)
-  const correctPassword = "heiligerabend";
-
+  const validPasswords = [
+  "klavier",   // deutsch
+  "piano"      // englisch
+];
+// Prüfen, ob eine der erlaubten Varianten passt
+const isCorrect = validPasswords.includes(entered);
+  
   // 2) Mindestdatum für das Öffnen von Tür 2
   const minDate = "2025-12-01"; // im Format YYYY-MM-DD
   const today = getTodayInBerlin();
 
-  const isCorrect = (entered === correctPassword);
+  // const isCorrect = (entered === correctPassword);
 
   // ---- Modus "check": nur prüfen, ob Lösung stimmt, Datum egal ----
   if (mode === "check") {
