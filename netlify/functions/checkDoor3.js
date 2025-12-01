@@ -1,4 +1,4 @@
-// netlify/functions/checkDoor1.js
+// netlify/functions/checkDoor3.js
 
 // Hilfsfunktion: aktuelles Datum in Europe/Berlin als "YYYY-MM-DD"
 function getTodayInBerlin() {
@@ -37,10 +37,12 @@ exports.handler = async (event) => {
   const entered = (body.password || "").trim().toLowerCase();
   const mode = (body.mode || "open").toLowerCase(); // "check" oder "open"
 
-  // 1) Passwort für Tür 2 (Lösung aus Tür 1)
+   // 1) Passwort für Tür 3 (Lösung aus Tür 2)
   const validPasswords = [
-  "Wales",   // deutsch
-  "wales"      // englisch
+  "Italien",   // deutsch
+  "Italy",     // englisch
+    "italy",      // englisch
+    "italien"      // englisch
 ];
 // Prüfen, ob eine der erlaubten Varianten passt
 const isCorrect = validPasswords.includes(entered);

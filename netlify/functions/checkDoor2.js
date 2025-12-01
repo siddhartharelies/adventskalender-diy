@@ -38,13 +38,18 @@ exports.handler = async (event) => {
   const mode = (body.mode || "open").toLowerCase(); // "check" oder "open"
 
   // 1) Passwort für Tür 2 (Lösung aus Tür 1)
-  const correctPassword = "klavier";
-
+  const validPasswords = [
+  "England",   // deutsch
+  "england"      // englisch
+];
+// Prüfen, ob eine der erlaubten Varianten passt
+const isCorrect = validPasswords.includes(entered);
+  
   // 2) Mindestdatum für das Öffnen von Tür 2
-  const minDate = "2025-12-02"; // im Format YYYY-MM-DD
+  const minDate = "2025-12-01"; // im Format YYYY-MM-DD
   const today = getTodayInBerlin();
 
-  const isCorrect = (entered === correctPassword);
+  // const isCorrect = (entered === correctPassword);
 
   // ---- Modus "check": nur prüfen, ob Lösung stimmt, Datum egal ----
   if (mode === "check") {
@@ -75,13 +80,13 @@ exports.handler = async (event) => {
     const contentHtml = `
       <h2>Glückwunsch!</h2>
       <p>Du hast das richtige Passwort eingegeben.</p>
-      <p>Hier ist dein nächstes Rätsel für Tür 3:</p>
+      <p>Hier ist dein nächstes Rätsel für Tür 2:</p>
       <p>
         Ich habe vier Beine und kann doch nicht laufen.<br>
         Ich trage Teller und Gläser bei vielen Besuchen.<br>
         Was bin ich?
       </p>
-      <p><strong>Die Lösung ist das Passwort für Tür 3.</strong></p>
+      <p><strong>Die Lösung ist das Passwort für Tür 2.</strong></p>
       <p><em>Gutschein-Fragment: BUCHSTABE 1 = G</em></p>
     `;
 

@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Tür 1</title>
+  <title>Tür 5</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -64,7 +64,7 @@
       color: #fff;
 
       /* ✅ HIER ANPASSEN: Türchen-Bild für diese Tür */
-      background-image: url('img/door01.jpg');  /* z.B. door03.jpg */
+      background-image: url('img/door05.jpg');  /* z.B. door03.jpg */
       background-size: cover;
       background-position: center;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
@@ -134,16 +134,16 @@
 
     <div class="door-header">
       <!-- ✅ HIER NUMMER EINTRAGEN: z.B. 3 -->
-      <div class="door-number">1</div>
-      <h1>Tür 1</h1>
+      <div class="door-number">5</div>
+      <h1>Tür 5</h1>
     </div>
 
     <!-- 1) Bereich: Passwort für diese Tür (aus vorheriger Tür) -->
-    <p><strong>Passwort für Tür 1 eingeben:</strong></p>
-    <p>Gib hier die Lösung aus dem Rätsel der Mail ein, um diese Tür zu öffnen.</p>
+    <p><strong>Passwort für Tür 5 eingeben:</strong></p>
+    <p>Gib hier die Lösung aus dem Rätsel von Tür 4 ein, um diese Tür zu öffnen.</p>
 
     <form id="pwForm">
-      <input type="password" id="password" placeholder="Passwort für Tür 1">
+      <input type="password" id="password" placeholder="Passwort für Tür 5">
       <button type="submit" class="button">Tür öffnen</button>
     </form>
 
@@ -151,26 +151,27 @@
 
     <!-- 2) Voller Inhalt der Tür: Rätsel für nächste Tür + Lösungstest -->
     <div id="door-content">
-      <h2>Rätsel für Tür 2</h2>
+      <h2>Rätsel für Tür 6</h2>
 
       <!-- ✅ HIER DEIN RÄTSELTEXT -->
       <p>
         <h2>Hier kommt dein Rätsel, dessen Lösung das Passwort für die nächste Türe ist:</h2><br>
-        In welchem Land wird der berühmte, stundenlang gedämpfte Christmas Pudding serviert,
-        der oft mit Brandy flambiert wird?<br>
+        In welchem Land isst man zu Weihnachten Vitel Toné, kaltes Kalbfleisch in Thunfisch-Kapernsauce?
+
+<br>
         <br>
-        “In which country is the famous, hours-steamed Christmas Pudding,
-        often served flaming with brandy, a holiday classic? <br>
+       In which country is Vitel Toné, cold veal in tuna–caper sauce, a traditional Christmas food?
+ <br>
         <br>
         In welchem Land feiere ich Weihnachten? <br>
         In which country do I celebrate Christmas?
       </p>
 
-      <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2.</p>
+      <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 6.</p>
 
-      <h2>Lösung für Tür 2 testen</h2>
+      <h2>Lösung für Tür 6 testen</h2>
       <form id="checkNextForm">
-        <input type="text" id="nextSolution" placeholder="Lösung für Tür 2">
+        <input type="text" id="nextSolution" placeholder="Lösung für Tür 6">
         <button type="submit" class="button">Lösung prüfen</button>
       </form>
 
@@ -178,7 +179,7 @@
 
       <p style="margin-top: 12px;">
         <!-- optional: Link direkt weiter zur nächsten Tür -->
-        <a class="back-link" href="tuer2.html">Weiter zu Tür 2</a>
+        <a class="back-link" href="tuer6.html">Weiter zu Tür 6</a>
       </p>
     </div>
 
@@ -188,9 +189,9 @@
   <script>
     // ✅ HIER ANPASSEN:
     // FÜR DIESE TÜR:
-    const thisDoorFunction = "checkDoor1";      // z.B. "checkDoor3"
+    const thisDoorFunction = "checkDoor5";      // z.B. "checkDoor3"
     // FÜR DIE NÄCHSTE TÜR (Lösungs-Test):
-    const nextDoorFunction = "checkDoor2"; // z.B. "checkDoor4"
+    const nextDoorFunction = "checkDoor6"; // z.B. "checkDoor4"
 
     // Passwort für diese Tür prüfen
     document.getElementById("pwForm").addEventListener("submit", async function (event) {

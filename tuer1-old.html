@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tür 1</title>
+</head>
+<body>
+  <h1>Tür 1</h1>
+  <p>Gib das Passwort ein (die Lösung aus dem Rätsel der Mail):</p>
+
+  <form id="pwForm">
+    <input type="password" id="password" placeholder="Passwort">
+    <button type="submit">Öffnen</button>
+  </form>
+
+  <p id="message"></p>
+
+  <div id="secret-content" style="display:none; margin-top:20px;"></div>
+
+  <p><a href="index.html">Zurück zur Kalender-Übersicht</a></p>
+
+  <script>
+    document.getElementById("pwForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const pw = document.getElementById("password").value;
+
+      const response = await fetch("/.netlify/functions/checkDoor1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: pw,
+          mode: "open"   // hier wirklich Tür öffnen
+        })
+      });
+
+      const data = await response.json();
+
+      const msg = document.getElementById("message");
+      const contentDiv = document.getElementById("secret-content");
+
+      if (data.success) {
+  msg.textContent = "Richtig! Tür 2 öffnet sich.";
+  contentDiv.innerHTML = data.contentHtml;
+  contentDiv.style.display = "block";
+} else {
+  // Prüfen, ob es zu früh ist
+  if (data.tooEarly) {
+    // Datum aus Antwort
+    const ab = data.availableFrom || "2025-12-01";
+    const [year, month, day] = ab.split("-");
+    msg.textContent = `Diese Tür kann erst ab dem ${day}.${month}.${year} geöffnet werden.`;
+  } else {
+    msg.textContent = "Falsches Passwort, versuche es noch einmal.";
+  }
+
+  contentDiv.style.display = "none";
+  contentDiv.innerHTML = "";
+}
+
+    });
+  </script>
+</body>
+</html>
