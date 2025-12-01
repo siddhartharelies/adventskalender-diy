@@ -40,7 +40,9 @@ exports.handler = async (event) => {
    // 1) Passwort für Tür 3 (Lösung aus Tür 2)
   const validPasswords = [
   "Italien",   // deutsch
-  "Italy"      // englisch
+  "Italy",     // englisch
+    "italy",      // englisch
+    "italien"      // englisch
 ];
 // Prüfen, ob eine der erlaubten Varianten passt
 const isCorrect = validPasswords.includes(entered);
