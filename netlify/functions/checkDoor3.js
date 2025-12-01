@@ -37,7 +37,7 @@ exports.handler = async (event) => {
   const entered = (body.password || "").trim().toLowerCase();
   const mode = (body.mode || "open").toLowerCase(); // "check" oder "open"
 
-  // 1) Passwort für Tür 2 (Lösung aus Tür 1)
+   // 1) Passwort für Tür 3 (Lösung aus Tür 2)
   const validPasswords = [
   "Italien",   // deutsch
   "Italy"      // englisch
