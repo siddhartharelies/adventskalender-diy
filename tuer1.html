@@ -143,7 +143,7 @@
     <p>Gib hier die Lösung aus dem Rätsel der Mail ein, um diese Tür zu öffnen.</p>
 
     <form id="pwForm">
-      <input type="password" id="password" placeholder="Passwort für Tür N">
+      <input type="password" id="password" placeholder="Passwort für Tür 1">
       <button type="submit" class="button">Tür öffnen</button>
     </form>
 
@@ -156,14 +156,14 @@
       <!-- ✅ HIER DEIN RÄTSELTEXT -->
       <p>
         Hier kommt dein Rätsel, dessen Lösung das Passwort für Tür 2 ist.<br>
-        „In welchem winterlichen Land ziehen während der heiligen Zeit
-vermummte Gestalten von Haus zu Haus,
-singen alte Lieder und wünschen Glück –
-ein Brauch namens Kolyady?“ <br>
+        In welchem winterlichen Land ziehen während der heiligen Zeit
+        vermummte Gestalten von Haus zu Haus,
+        singen alte Lieder und wünschen Glück –
+        ein Brauch namens Kolyady?“ <br>
 
-“In which wintry country do masked carolers roam from house to house
-during the holy season, singing ancient songs
-and bringing good wishes — a tradition called Kolyady?” <br>
+        In which wintry country do masked carolers roam from house to house
+        during the holy season, singing ancient songs
+        and bringing good wishes — a tradition called Kolyady?” <br>
         In welchem Land feiere ich Weihnachten? <br>
         In which country do I celebrate Christmas?
       </p>
@@ -172,7 +172,7 @@ and bringing good wishes — a tradition called Kolyady?” <br>
 
       <h2>Lösung für Tür 2 testen</h2>
       <form id="checkNextForm">
-        <input type="text" id="nextSolution" placeholder="Lösung für Tür N+1">
+        <input type="text" id="nextSolution" placeholder="Lösung für Tür 2">
         <button type="submit" class="button">Lösung prüfen</button>
       </form>
 
@@ -180,7 +180,7 @@ and bringing good wishes — a tradition called Kolyady?” <br>
 
       <p style="margin-top: 12px;">
         <!-- optional: Link direkt weiter zur nächsten Tür -->
-        <a class="back-link" href="tuerN+1.html">Weiter zu Tür 2</a>
+        <a class="back-link" href="tuer2.html">Weiter zu Tür 2</a>
       </p>
     </div>
 
@@ -192,7 +192,7 @@ and bringing good wishes — a tradition called Kolyady?” <br>
     // FÜR DIESE TÜR:
     const thisDoorFunction = "checkDoor1";      // z.B. "checkDoor3"
     // FÜR DIE NÄCHSTE TÜR (Lösungs-Test):
-    const nextDoorFunction = "checkDoorNplus2"; // z.B. "checkDoor4"
+    const nextDoorFunction = "checkDoor2"; // z.B. "checkDoor4"
 
     // Passwort für diese Tür prüfen
     document.getElementById("pwForm").addEventListener("submit", async function (event) {
