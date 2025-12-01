@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tür 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    /* Seitenhintergrund */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+
+      /* ⭐ Tür-spezifisches Hintergrundbild */
+      background-image:
+        url('img/bg-door01.jpg'),
+        url('img/background-door.jpg'); /* fallback */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      position: relative;
+    }
+
+    /* dunkler Overlay, verbessert Lesbarkeit */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.40);
+      z-index: -1;
+    }
+
+    /* Karte in der Mitte */
+    .door-page {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 20px 25px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+
+    .door-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .door-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+      background-image: url('img/door01.jpg'); /* Tür-Icon wie Startseite */
+      background-size: cover;
+      background-position: center;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    p {
+      line-height: 1.5;
+      margin: 0.5em 0;
+    }
+
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    input[type="text"] {
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+      width: 100%;
+      max-width: 250px;
+      box-sizing: border-box;
+    }
+
+    .button, .back-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      background: #b30000;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .button:hover, .back-link:hover {
+      background: #e60000;
+    }
+
+    .status {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="door-page">
+
+    <div class="door-header">
+      <div class="door-number">1</div>
+      <h1>Tür 1</h1>
+    </div>
+
+    <p><strong>Rätsel:</strong></p>
+    <p>
+      Ich habe Tasten, aber keine Türen.<br>
+      Ich mache Musik, doch bin kein Radio.<br>
+      Was bin ich?
+    </p>
+
+    <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür 2.</p>
+
+    <h2>Lösung testen</h2>
+    <form id="checkForm">
+      <input type="text" id="solution" placeholder="Deine Lösung">
+      <button type="submit" class="button">Prüfen</button>
+    </form>
+
+    <p id="checkResult" class="status"></p>
+
+    <a class="back-link" href="index.html">Zurück zur Kalender-Übersicht</a>
+  </div>
+
+  <script>
+    document.getElementById("checkForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const solution = document.getElementById("solution").value;
+
+      const response = await fetch("/.netlify/functions/checkDoor2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: solution,
+          mode: "check"
+        })
+      });
+
+      const data = await response.json();
+      const result = document.getElementById("checkResult");
+
+      if (data.success) {
+        result.textContent = "✅ Richtig! Du kannst dieses Passwort für Tür 2 benutzen.";
+      } else {
+        result.textContent = "❌ Diese Lösung ist leider falsch.";
+      }
+    });
+  </script>
+</body>
+</html>
