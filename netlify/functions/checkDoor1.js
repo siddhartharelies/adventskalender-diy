@@ -39,8 +39,8 @@ exports.handler = async (event) => {
 
   // 1) Passwort für Tür 2 (Lösung aus Tür 1)
   const validPasswords = [
-  "klavier",   // deutsch
-  "piano"      // englisch
+  "heiligerAbend",   // deutsch
+  "heiligabend"      // englisch
 ];
 // Prüfen, ob eine der erlaubten Varianten passt
 const isCorrect = validPasswords.includes(entered);
