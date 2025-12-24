@@ -1,88 +1,266 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>README</title>
-
-  <!-- Marked.js: kleine Bibliothek, die Markdown in HTML umwandelt -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <title>Tür 24</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
+    /* Seitenhintergrund – Tür-spezifisches Bild + Fallback */
     body {
+      margin: 0;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
+
+      /* ✅ HIER ANPASSEN: bg-doorN.jpg + fallback */
+      background-image:
+        url('img/Tuer-Background.jpg'),       /* z.B. bg-door03.jpg */
+        url('img/background-door.jpg');/* gemeinsamer Fallback */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
     }
-    h1, h2, h3 {
-      margin-top: 1.2em;
+
+    /* dunkler Overlay für Lesbarkeit */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
     }
-    pre {
-      background: #f0f0f0;
-      padding: 10px;
-      overflow-x: auto;
+
+    /* Karte in der Mitte */
+    .door-page {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 20px 25px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
     }
-    code {
-      font-family: Consolas, "Courier New", monospace;
+
+    .door-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
     }
-    #readme-container {
-      border: 1px solid #ddd;
-      padding: 15px;
+
+    .door-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+
+      /* ✅ HIER ANPASSEN: Türchen-Bild für diese Tür */
+      background-image: url('img/door024.jpg');  /* z.B. door03.jpg */
+      background-size: cover;
+      background-position: center;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    h2 {
       margin-top: 20px;
-      background: #fafafa;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    p {
+      line-height: 1.5;
+      margin: 0.5em 0;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+      width: 100%;
+      max-width: 260px;
+      box-sizing: border-box;
+    }
+
+    .button, .back-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      background: #b30000;
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .button:hover, .back-link:hover {
+      background: #e60000;
+    }
+
+    .status {
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    #door-content {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 12px;
+      display: none; /* wichtig: erst nach richtigem Passwort anzeigen */
     }
   </style>
 </head>
+
 <body>
-  <h1>README</h1>
-  <p>
-    Hier findest du hilfreiche Hinweise (README) dieses Adventskalenders
-  </p>
+  <div class="door-page">
 
-  <p><strong>Hinweis:</strong> Bei Fragen oder Problemen gerne melden</p>
+    <div class="door-header">
+      <!-- ✅ HIER NUMMER EINTRAGEN: z.B. 3 -->
+      <div class="door-number">24</div>
+      <h1>Tür 24</h1>
+    </div>
 
-  <div id="status">Lade README…</div>
-  <div id="readme-container"></div>
+    <!-- 1) Bereich: Passwort für diese Tür (aus vorheriger Tür) -->
+    <p><strong>Passwort für Tür 24 eingeben:</strong></p>
+    <p>Gib hier die Lösung aus dem Rätsel von Tür 23 ein, um diese Tür zu öffnen.</p>
 
-  <p style="margin-top: 20px;">
-    <a href="index.html">Zurück zur Kalender-Übersicht</a>
-  </p>
+    <form id="pwForm">
+      <input type="password" id="password" placeholder="Passwort für Tür 24">
+      <button type="submit" class="button">Tür öffnen</button>
+    </form>
+
+    <p id="pwMessage" class="status"></p>
+
+    <!-- 2) Voller Inhalt der Tür: Rätsel für nächste Tür + Lösungstest -->
+    <div id="door-content">
+      <h2>Finales Rätsel für Tür Merry Christmas!</h2>
+
+      <!-- ✅ HIER DEIN RÄTSELTEXT -->
+      <p>
+      Glückwunsch. Hier kommt dein Rätsel, dessen Lösung das Passwort für die nächste Türe ist:<br>
+        <br>
+     Setze die 24 Anfangsbuchstaben der bisherigen Lösungsworte in der entstandenen Reihenfolge zusammen. Es entsteht ein weihnachtliches deutsches Lösungswort!
+
+<br>
+     Put the first 24 letters of the previous solution words together in the order they appear. This will create a german Christmas-themed solution word!
+
+ <br>
+        <br>
+        Wie lautet das Wort? <br>
+        What is the word?
+      </p>
+
+      <p><strong>Hinweis:</strong> Die Lösung dieses Rätsels ist das Passwort für Tür Merry Christmas!</p>
+
+      <h2>Lösung für finale Tür testen</h2>
+      <form id="checkNextForm">
+        <input type="text" id="nextSolution" placeholder="Lösung für Tür Merry Christmas!">
+        <button type="submit" class="button">Lösung prüfen</button>
+      </form>
+
+      <p id="checkNextResult" class="status"></p>
+
+      <p style="margin-top: 12px;">
+        <!-- optional: Link direkt weiter zur nächsten Tür -->
+            <a class="back-link" href="tuer26.html">Weiter zum Finale</a>
+      </p>
+    </div>
+
+    <a class="back-link" href="index.html">Zurück zur Kalender-Übersicht</a>
+  </div>
 
   <script>
-    // 🔧 HIER ANPASSEN:
-    // Ersetze DEINNAME und DEINREPO durch deinen GitHub-Nutzernamen und Repo-Namen.
-    const githubUser = "siddhartharelies";           // z.B. "maxmustermann"
-    const githubRepo = "adventskalender-diy"; // dein Repository-Name
-    const branch = "main"; // oder "master", falls dein Repo so heißt
+    // ✅ HIER ANPASSEN:
+    // FÜR DIESE TÜR:
+    const thisDoorFunction = "checkDoor24";      // z.B. "checkDoor3"
+    // FÜR DIE NÄCHSTE TÜR (Lösungs-Test):
+    const nextDoorFunction = "checkDoor25"; // z.B. "checkDoor4"
 
-    const readmeUrl = `https://raw.githubusercontent.com/${githubUser}/${githubRepo}/${branch}/README.md`;
+    // Passwort für diese Tür prüfen
+    document.getElementById("pwForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-    const statusEl = document.getElementById("status");
-    const containerEl = document.getElementById("readme-container");
+      const pw = document.getElementById("password").value;
 
-    async function loadReadme() {
-      try {
-        const res = await fetch(readmeUrl);
+      const response = await fetch("/.netlify/functions/" + thisDoorFunction, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: pw,
+          mode: "open"   // Tür wirklich öffnen (inkl. Datumssperre in der Function)
+        })
+      });
 
-        if (!res.ok) {
-          statusEl.textContent = "Konnte die README nicht laden (HTTP-Fehler: " + res.status + ").";
-          return;
+      const data = await response.json();
+      const msg = document.getElementById("pwMessage");
+      const contentDiv = document.getElementById("door-content");
+
+      if (data.success) {
+        msg.textContent = "✅ Richtig! Tür ist geöffnet.";
+        contentDiv.style.display = "block";
+      } else {
+        if (data.tooEarly) {
+          const ab = data.availableFrom || "";
+          if (ab) {
+            const [year, month, day] = ab.split("-");
+            msg.textContent = `⏳ Diese Tür kann erst am ${day}.${month}.${year} geöffnet werden.`;
+          } else {
+            msg.textContent = "⏳ Diese Tür ist noch nicht freigegeben.";
+          }
+        } else {
+          msg.textContent = "❌ Falsches Passwort, bitte versuche es erneut.";
         }
-
-        const markdown = await res.text();
-
-        // Markdown → HTML mit marked.js
-        const html = marked.parse(markdown);
-
-        statusEl.style.display = "none";
-        containerEl.innerHTML = html;
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = "Beim Laden der README ist ein Fehler aufgetreten.";
+        contentDiv.style.display = "none";
       }
-    }
+    });
 
-    loadReadme();
+    // Lösung für NÄCHSTE Tür testen
+    document.getElementById("checkNextForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const solution = document.getElementById("nextSolution").value;
+
+      const response = await fetch("/.netlify/functions/" + nextDoorFunction, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: solution,
+          mode: "check"   // nur prüfen, noch NICHT öffnen
+        })
+      });
+
+      const data = await response.json();
+      const result = document.getElementById("checkNextResult");
+
+      if (data.success) {
+        result.textContent = "✅ Die Lösung ist korrekt! Du kannst sie als Passwort für die nächste Tür benutzen.";
+      } else {
+        result.textContent = "❌ Diese Lösung ist leider falsch.";
+      }
+    });
   </script>
 </body>
 </html>
