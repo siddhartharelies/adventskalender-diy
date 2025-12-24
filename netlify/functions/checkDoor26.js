@@ -39,9 +39,9 @@ exports.handler = async (event) => {
 
   // ✅ HIER steht der finale Abschlusstext (ohne Links, ohne nächste Tür)
   const finalHtml = `
-    <h2>🎉 Herzlichen Glückwunsch!</h2>
+    <h2>🎉 Herzlichen Glückwunsch! Congratulation!</h2>
     <p>Ihr habt alle Türen geöffnet und die Rätsel gemeistert.</p>
-    <p><strong>Das war die finale Überraschung.</strong></p>
+    <p><strong>Ihr habr einen Gutschein von mydays gewonnen. Für ein unvergessliches Abenteuer eurer Wahl.</strong></p>
     <p>Wir wünschen euch wunderschöne Feiertage! 🎄</p>
   `;
 
