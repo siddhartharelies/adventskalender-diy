@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Finale Überraschung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body{
+      margin:0; min-height:100vh; font-family:Arial,sans-serif;
+      display:flex; align-items:center; justify-content:center; padding:20px;
+      background-image: url('img/bg-door26.jpg'), url('img/background-door.jpg');
+      background-size: cover; background-position:center; background-repeat:no-repeat;
+      position:relative;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; background:rgba(0,0,0,0.40); z-index:-1;
+    }
+    .card{
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      padding: 20px 25px;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+    .header{ display:flex; align-items:center; gap:15px; margin-bottom:15px; }
+    .badge{
+      width:56px; height:56px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:800; font-size:1.25rem; color:#fff;
+      background-image:url('img/door26.jpg');
+      background-size:cover; background-position:center;
+      text-shadow:2px 2px 4px rgba(0,0,0,0.7);
+    }
+    h1{ margin:0; font-size:1.8rem; }
+    p{ line-height:1.5; margin:0.5em 0; }
+    .btn, .back{
+      display:inline-block; margin-top:12px;
+      padding:8px 14px; border-radius:8px;
+      text-decoration:none; border:none; cursor:pointer;
+      background:#b30000; color:#fff; font-weight:700; font-size:0.95rem;
+    }
+    .btn:hover, .back:hover{ background:#e60000; }
+    input[type="password"]{
+      padding:8px 10px; border-radius:8px; border:1px solid #ccc;
+      font-size:1rem; width:100%; max-width:320px; box-sizing:border-box;
+    }
+    .status{ margin-top:10px; font-weight:700; }
+    #final-content{ display:none; margin-top:18px; border-top:1px solid #ddd; padding-top:14px; }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="badge">26</div>
+      <h1>Tür 26 – Finale Überraschung</h1>
+    </div>
+
+    <p>Gib das <strong>finale Kennwort</strong> ein, um die Überraschung zu enthüllen.</p>
+
+    <form id="pwForm">
+      <input id="password" type="password" placeholder="Finales Kennwort" autocomplete="off" />
+      <button class="btn" type="submit">Öffnen</button>
+    </form>
+
+    <p id="message" class="status"></p>
+
+    <!-- Wird erst nach erfolgreicher Prüfung gefüllt -->
+    <div id="final-content"></div>
+
+    <a class="back" href="index.html">Zurück zur Übersicht</a>
+  </div>
+
+  <script>
+    document.getElementById("pwForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const pw = document.getElementById("password").value;
+
+      const res = await fetch("/.netlify/functions/checkDoor26", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw })
+      });
+
+      const data = await res.json();
+
+      const msg = document.getElementById("message");
+      const content = document.getElementById("final-content");
+
+      if (data.success) {
+        msg.textContent = "✅ Richtig – die finale Überraschung ist geöffnet!";
+        content.innerHTML = data.finalHtml;   // kommt serverseitig
+        content.style.display = "block";
+      } else {
+        msg.textContent = "❌ Falsches Kennwort. Bitte versuche es erneut.";
+        content.style.display = "none";
+        content.innerHTML = "";
+      }
+    });
+  </script>
+</body>
+</html>
