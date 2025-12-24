@@ -41,7 +41,7 @@ exports.handler = async (event) => {
   const finalHtml = `
     <h2>🎉 Herzlichen Glückwunsch! Congratulation!</h2>
     <p>Ihr habt alle Türen geöffnet und die Rätsel gemeistert.</p>
-    <p><strong>Ihr habr einen Gutschein von mydays gewonnen. Für ein unvergessliches Abenteuer eurer Wahl.</strong></p>
+    <p><strong>Ihr habr einen Gutschein von 🎉 mydays 🎉 gewonnen. Für ein unvergessliches Abenteuer eurer Wahl.</strong></p>
     <p>Wir wünschen euch wunderschöne Feiertage! 🎄</p>
   `;
 
